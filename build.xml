@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<project name="find_dups" default="build">
+	<property name="app" value="fd"/>
+	<property name="src" value="src"/>
+	<property name="build_root" value="ant_build"/>
+	<property name="app_build" value="${build_root}/${app}"/>
+	<property name="annotations_src" value="${build_root}/annotations"/>
+	<property name="min_jdk" value="1.8"/>
+	<property name="app_name" value="Find Duplicates"/>
+	<property name="copyright_owner" value="Richard A. Wilkes"/>
+	<property name="primary_version" value="1.0.0"/>
+	<tstamp>
+		<format property="version" pattern="${primary_version}.yyyyMMddHHmmss"/>
+	</tstamp>
+	<tstamp>
+		<format property="year" pattern="yyyy"/>
+	</tstamp>
+
+	<target name="clean">
+		<delete dir="${build_root}"/>
+		<delete>
+			<fileset dir="." includes="${app}-*.jar"/>
+		</delete>
+	</target>
+
+	<target name="build" depends="clean">
+		<mkdir dir="${app_build}"/>
+		<mkdir dir="${annotations_src}"/>
+
+		<!-- Compile the code. -->
+		<javac destdir="${app_build}" debug="no" optimize="yes"
+			target="${min_jdk}" source="${min_jdk}" deprecation="yes"
+			includeantruntime="no">
+			<src path="${src}"/>
+			<src path="../toolkit/src"/>
+			<!-- Including specific files, since just specifying the main class won't run the annotation processors across the files in the toolkit for some reason -->
+			<include name="com/trollworks/FindDuplicates.java"/>
+			<include name="com/trollworks/toolkit/annotation/Localize.java"/>
+			<include name="com/trollworks/toolkit/io/FileScanner.java"/>
+			<include name="com/trollworks/toolkit/io/Log.java"/>
+			<include name="com/trollworks/toolkit/io/UrlUtils.java"/>
+			<include name="com/trollworks/toolkit/utility/cmdline/CmdLine.java"/>
+			<include name="com/trollworks/toolkit/utility/cmdline/CmdLineData.java"/>
+			<include name="com/trollworks/toolkit/utility/cmdline/CmdLineOption.java"/>
+			<include name="com/trollworks/toolkit/utility/text/TextUtility.java"/>
+			<include name="com/trollworks/toolkit/utility/BundleInfo.java"/>
+			<include name="com/trollworks/toolkit/utility/Debug.java"/>
+			<include name="com/trollworks/toolkit/utility/Localization.java"/>
+			<include name="com/trollworks/toolkit/utility/Numbers.java"/>
+			<include name="com/trollworks/toolkit/utility/PathUtils.java"/>
+			<include name="com/trollworks/toolkit/utility/Platform.java"/>
+			<include name="com/trollworks/toolkit/utility/Text.java"/>
+			<include name="com/trollworks/toolkit/utility/Version.java"/>
+			<compilerarg value="-Xlint:all"/>
+			<compilerarg value="-Xlint:-serial"/>
+			<compilerarg value="-processorpath"/>
+			<compilerarg value="../toolkit/libraries/toolkit_annotation_processors.jar"/>
+			<compilerarg value="-s"/>
+			<compilerarg value="${annotations_src}"/>
+			<compilerarg value="-implicit:class"/>
+		</javac>
+
+		<!-- Create the jar file. -->
+		<jar destfile="${app}-${primary_version}.jar" basedir="${app_build}" duplicate="fail">
+			<manifest>
+				<attribute name="Main-Class" value="com.trollworks.FindDuplicates"/>
+				<attribute name="bundle-name" value="${app_name}"/>
+				<attribute name="bundle-version" value="${version}"/>
+				<attribute name="bundle-license" value="Mozilla Public License 2.0"/>
+				<attribute name="bundle-copyright-owner" value="${copyright_owner}"/>
+				<attribute name="bundle-copyright-years" value="2006-${year}"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
