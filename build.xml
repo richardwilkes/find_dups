@@ -4,7 +4,6 @@
 	<property name="src" value="src"/>
 	<property name="build_root" value="ant_build"/>
 	<property name="app_build" value="${build_root}/${app}"/>
-	<property name="annotations_src" value="${build_root}/annotations"/>
 	<property name="min_jdk" value="1.8"/>
 	<property name="app_name" value="Find Duplicates"/>
 	<property name="copyright_owner" value="Richard A. Wilkes"/>
@@ -25,7 +24,6 @@
 
 	<target name="build" depends="clean">
 		<mkdir dir="${app_build}"/>
-		<mkdir dir="${annotations_src}"/>
 
 		<!-- Compile the code. -->
 		<javac destdir="${app_build}" debug="no" optimize="yes"
@@ -53,11 +51,6 @@
 			<include name="com/trollworks/toolkit/utility/Version.java"/>
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
-			<compilerarg value="-processorpath"/>
-			<compilerarg value="../toolkit/libraries/toolkit_annotation_processors.jar"/>
-			<compilerarg value="-s"/>
-			<compilerarg value="${annotations_src}"/>
-			<compilerarg value="-implicit:class"/>
 		</javac>
 
 		<!-- Create the jar file. -->
