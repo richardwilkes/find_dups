@@ -15,9 +15,9 @@ import com.trollworks.toolkit.annotation.Localize;
 import com.trollworks.toolkit.io.FileScanner;
 import com.trollworks.toolkit.utility.Localization;
 import com.trollworks.toolkit.utility.PathUtils;
-import com.trollworks.toolkit.utility.Text;
 import com.trollworks.toolkit.utility.cmdline.CmdLine;
 import com.trollworks.toolkit.utility.cmdline.CmdLineOption;
+import com.trollworks.toolkit.utility.text.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
