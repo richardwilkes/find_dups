@@ -34,31 +34,31 @@ import java.util.Set;
 /** Locates and optionally deletes duplicate files in a file system hierarchy. */
 public class FindDuplicates implements FileScanner.Handler {
 	@Localize("Examined %,d files, containing %,d bytes.")
-	private static String			PROGRESS;
+	private static String	PROGRESS;
 	@Localize("\n%s %,d files that were duplicated, containing %,d bytes.\n")
-	private static String			RESULT;
+	private static String	RESULT;
 	@Localize("Discovered")
-	private static String			DISCOVERED;
+	private static String	DISCOVERED;
 	@Localize("Removed")
-	private static String			REMOVED;
+	private static String	REMOVED;
 	@Localize("%s is a duplicate of %s\n")
-	private static String			DUPLICATE_OF;
+	private static String	DUPLICATE_OF;
 	@Localize(" ** DELETED %s\n")
-	private static String			DELETED;
+	private static String	DELETED;
 	@Localize("Delete all duplicates found.")
-	private static String			DELETE_DESCRIPTION;
+	private static String	DELETE_DESCRIPTION;
 	@Localize("Process files and directories that start with a dot (.). These 'hidden' files are ignored by default.")
-	private static String			INCLUDE_HIDDEN_DESCRIPTION;
+	private static String	INCLUDE_HIDDEN_DESCRIPTION;
 	@Localize("Each directory specified on the command line will be be scanned for duplicates.")
-	private static String			HELP_HEADER;
+	private static String	HELP_HEADER;
 	@Localize("Limit processing to just files with the specified extension. May be specified more than once.")
-	private static String			EXTENSION_DESCRIPTION;
+	private static String	EXTENSION_DESCRIPTION;
 	@Localize("EXTENSION")
-	private static String			EXTENSION_ARG;
+	private static String	EXTENSION_ARG;
 	@Localize("** Skipping. Not a directory: %s\n")
-	private static String			NOT_A_DIRECTORY;
+	private static String	NOT_A_DIRECTORY;
 	@Localize("** Skipping. Does not exist: %s\n")
-	private static String			DOESNT_EXIST;
+	private static String	DOESNT_EXIST;
 
 	static {
 		Localization.initialize();
