@@ -24,31 +24,14 @@
 
 	<target name="build" depends="clean">
 		<mkdir dir="${app_build}"/>
+		
+		<!-- Unpack the support libraries into our build tree -->
+		<unjar src="../apple_stubs/apple_stubs.jar" dest="${app_build}"/>
+		<unjar src="../toolkit/libraries/toolkit-4.4.1.jar" dest="${app_build}"/>
 
 		<!-- Compile the code. -->
-		<javac destdir="${app_build}" debug="no" optimize="yes"
-			target="${min_jdk}" source="${min_jdk}" deprecation="yes"
-			includeantruntime="no">
-			<src path="${src}"/>
-			<src path="../toolkit/src"/>
-			<!-- Including specific files, since just specifying the main class won't run the annotation processors across the files in the toolkit for some reason -->
-			<include name="com/trollworks/FindDuplicates.java"/>
-			<include name="com/trollworks/toolkit/annotation/Localize.java"/>
-			<include name="com/trollworks/toolkit/io/FileScanner.java"/>
-			<include name="com/trollworks/toolkit/io/Log.java"/>
-			<include name="com/trollworks/toolkit/io/UrlUtils.java"/>
-			<include name="com/trollworks/toolkit/utility/cmdline/CmdLine.java"/>
-			<include name="com/trollworks/toolkit/utility/cmdline/CmdLineData.java"/>
-			<include name="com/trollworks/toolkit/utility/cmdline/CmdLineOption.java"/>
-			<include name="com/trollworks/toolkit/utility/text/TextUtility.java"/>
-			<include name="com/trollworks/toolkit/utility/BundleInfo.java"/>
-			<include name="com/trollworks/toolkit/utility/Debug.java"/>
-			<include name="com/trollworks/toolkit/utility/Localization.java"/>
-			<include name="com/trollworks/toolkit/utility/Numbers.java"/>
-			<include name="com/trollworks/toolkit/utility/PathUtils.java"/>
-			<include name="com/trollworks/toolkit/utility/Platform.java"/>
-			<include name="com/trollworks/toolkit/utility/Text.java"/>
-			<include name="com/trollworks/toolkit/utility/Version.java"/>
+		<javac srcdir="${src}" destdir="${app_build}" encoding="UTF-8" debug="no" optimize="yes"
+			target="${min_jdk}" source="${min_jdk}" deprecation="true" includeantruntime="no">
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
 		</javac>
