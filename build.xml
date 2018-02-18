@@ -24,10 +24,10 @@
 
 	<target name="build" depends="clean">
 		<mkdir dir="${app_build}"/>
-		
+
 		<!-- Unpack the support libraries into our build tree -->
 		<unjar src="../apple_stubs/apple_stubs.jar" dest="${app_build}"/>
-		<unjar src="../toolkit/libraries/toolkit-4.4.1.jar" dest="${app_build}"/>
+		<unjar src="../toolkit/libraries/toolkit-4.10.0.jar" dest="${app_build}"/>
 
 		<!-- Compile the code. -->
 		<javac srcdir="${src}" destdir="${app_build}" encoding="UTF-8" debug="no" optimize="yes"
